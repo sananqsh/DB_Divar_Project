@@ -2,7 +2,7 @@
 -- INSERT INTO
 ---------------------------------------
 
---PaymentMethod
+-- PaymentMethod
 INSERT INTO PaymentMethod (MethodName, IsActive)
 VALUES ('Credit Card', TRUE);
 
