@@ -1,33 +1,33 @@
 ---------------------------------------
 -- DROP IF EXISTS
 ---------------------------------------
-DROP TABLE IF EXISTS "user" CASCADE;
-DROP TABLE IF EXISTS UserProfile CASCADE;
-DROP TABLE IF EXISTS Category CASCADE;
-DROP TABLE IF EXISTS Advertisement  CASCADE;
-DROP TABLE IF EXISTS AdImage  CASCADE;
-DROP TABLE IF EXISTS Message CASCADE;
-DROP TABLE IF EXISTS Bookmark CASCADE;
-DROP TABLE IF EXISTS Review CASCADE;
-DROP TABLE IF EXISTS PaymentMethod CASCADE;
-DROP TABLE IF EXISTS Transaction CASCADE;
+DROP TABLE IF EXISTS Users CASCADE;
+DROP TABLE IF EXISTS UserProfiles CASCADE;
+DROP TABLE IF EXISTS Categories CASCADE;
+DROP TABLE IF EXISTS Advertisements  CASCADE;
+DROP TABLE IF EXISTS AdImages  CASCADE;
+DROP TABLE IF EXISTS Messages CASCADE;
+DROP TABLE IF EXISTS Bookmarks CASCADE;
+DROP TABLE IF EXISTS Reviews CASCADE;
+DROP TABLE IF EXISTS PaymentMethods CASCADE;
+DROP TABLE IF EXISTS Transactions CASCADE;
 DROP TABLE IF EXISTS PaymentGatewayDetails CASCADE;
-DROP TABLE IF EXISTS Report CASCADE;
-DROP TABLE IF EXISTS Notification CASCADE;
-DROP TABLE IF EXISTS Location CASCADE;
-DROP TABLE IF EXISTS CategoryAttribute CASCADE;
-DROP TABLE IF EXISTS AdAttribute CASCADE;
-DROP TABLE IF EXISTS "order" CASCADE;
-DROP TABLE IF EXISTS OTP  CASCADE;
-DROP TABLE IF EXISTS Commission CASCADE;
-DROP TABLE IF EXISTS Wallet CASCADE;
-DROP TABLE IF EXISTS WalletTransaction CASCADE;
-DROP TABLE IF EXISTS Payout CASCADE;
+DROP TABLE IF EXISTS Reports CASCADE;
+DROP TABLE IF EXISTS Notifications CASCADE;
+DROP TABLE IF EXISTS Locations CASCADE;
+DROP TABLE IF EXISTS CategoryAttributes CASCADE;
+DROP TABLE IF EXISTS AdAttributes CASCADE;
+DROP TABLE IF EXISTS Orders CASCADE;
+DROP TABLE IF EXISTS OTPs  CASCADE;
+DROP TABLE IF EXISTS Commissions CASCADE;
+DROP TABLE IF EXISTS Wallets CASCADE;
+DROP TABLE IF EXISTS WalletTransactions CASCADE;
+DROP TABLE IF EXISTS Payouts CASCADE;
 
 ---------------------------------------
 -- CREATE TABLE
 ---------------------------------------
-CREATE TABLE "user" (
+CREATE TABLE Users (
     UserID SERIAL PRIMARY KEY,
     Username VARCHAR(50) UNIQUE NOT NULL,
     Password VARCHAR(255) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE "user" (
     Status VARCHAR(50)
 );
 
-CREATE TABLE UserProfile (
+CREATE TABLE UserProfiles (
     ProfileID SERIAL PRIMARY KEY,
     FirstName VARCHAR(50),
     LastName VARCHAR(50),
@@ -49,19 +49,19 @@ CREATE TABLE UserProfile (
     Province VARCHAR(50),
     PostalCode VARCHAR(20),
     Biography TEXT,
-    UserID INT UNIQUE REFERENCES "user"(UserID) ON DELETE CASCADE
+    UserID INT UNIQUE REFERENCES Users(UserID) ON DELETE CASCADE
 );
 
-CREATE TABLE Category (
+CREATE TABLE Categories (
     CategoryID SERIAL PRIMARY KEY,
     NameFa VARCHAR(100),
     NameEn VARCHAR(100),
     Slug VARCHAR(100),
     Description TEXT,
-    ParentCategoryID INT REFERENCES Category(CategoryID) ON DELETE SET NULL
+    ParentCategoryID INT REFERENCES Categories(CategoryID) ON DELETE SET NULL
 );
 
-CREATE TABLE Advertisement (
+CREATE TABLE Advertisements (
     AdID SERIAL PRIMARY KEY,
     Title VARCHAR(200),
     Description TEXT,
@@ -70,166 +70,165 @@ CREATE TABLE Advertisement (
     ExpiryDate TIMESTAMP,
     Status VARCHAR(50),
     ViewCount INT DEFAULT 0,
-    CategoryID INT REFERENCES Category(CategoryID),
-    UserID INT REFERENCES "user"(UserID)
+    CategoryID INT REFERENCES Categories(CategoryID),
+    UserID INT REFERENCES Users(UserID)
 );
 
-CREATE TABLE AdImage (
+CREATE TABLE AdImages (
     ImageID SERIAL PRIMARY KEY,
     ImageURL TEXT,
     UploadDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     IsMainImage BOOLEAN DEFAULT FALSE,
-    AdID INT REFERENCES Advertisement(AdID) ON DELETE CASCADE
+    AdID INT REFERENCES Advertisements(AdID) ON DELETE CASCADE
 );
 
-CREATE TABLE Message (
+CREATE TABLE Messages (
     MessageID SERIAL PRIMARY KEY,
     Content TEXT,
     SendDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     IsRead BOOLEAN DEFAULT FALSE,
-    SenderID INT REFERENCES "user"(UserID),
-    ReceiverID INT REFERENCES "user"(UserID),
-    AdID INT REFERENCES Advertisement(AdID)
+    SenderID INT REFERENCES Users(UserID),
+    ReceiverID INT REFERENCES Users(UserID),
+    AdID INT REFERENCES Advertisements(AdID)
 );
 
-CREATE TABLE Bookmark (
+CREATE TABLE Bookmarks (
     BookmarkID SERIAL PRIMARY KEY,
     BookmarkDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UserID INT REFERENCES "user"(UserID),
-    AdID INT REFERENCES Advertisement(AdID)
+    UserID INT REFERENCES Users(UserID),
+    AdID INT REFERENCES Advertisements(AdID)
 );
 
-CREATE TABLE Review (
+CREATE TABLE Reviews (
     ReviewID SERIAL PRIMARY KEY,
     Rating INT CHECK (Rating BETWEEN 1 AND 5),
     Comment TEXT,
     ReviewDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    ReviewerID INT REFERENCES "user"(UserID),
-    TargetUserID INT REFERENCES "user"(UserID)
+    ReviewerID INT REFERENCES Users(UserID),
+    TargetUserID INT REFERENCES Users(UserID)
 );
 
-CREATE TABLE PaymentMethod (
+CREATE TABLE PaymentMethods (
     PaymentMethodID SERIAL PRIMARY KEY,
     MethodName VARCHAR(100),
     IsActive BOOLEAN DEFAULT TRUE
 );
 
-CREATE TABLE Transaction (
+CREATE TABLE Transactions (
     TransactionID SERIAL PRIMARY KEY,
     TransactionDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Amount NUMERIC(10, 2),
     Status VARCHAR(50),
-    PaymentGatewayDetails TEXT,
-    PaymentMethodID INT REFERENCES PaymentMethod(PaymentMethodID)
+    PaymentMethodID INT REFERENCES PaymentMethods(PaymentMethodID)
 );
 
 CREATE TABLE PaymentGatewayDetails (
     PaymentGatewayDetailsID SERIAL PRIMARY KEY,
     PaymentToken TEXT,
     ProcessorResponse TEXT,
-    TransactionID INT UNIQUE REFERENCES Transaction(TransactionID) ON DELETE CASCADE
+    TransactionID INT UNIQUE REFERENCES Transactions(TransactionID) ON DELETE CASCADE
 );
 
-CREATE TABLE Report (
+CREATE TABLE Reports (
     ReportID SERIAL PRIMARY KEY,
     ReportType VARCHAR(100),
     Description TEXT,
     ReportDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Status VARCHAR(50),
-    ReporterUserID INT REFERENCES "user"(UserID),
-    AdID INT REFERENCES Advertisement(AdID),
-    ReportedUserID INT REFERENCES "user"(UserID)
+    ReporterUserID INT REFERENCES Users(UserID),
+    AdID INT REFERENCES Advertisements(AdID),
+    ReportedUserID INT REFERENCES Users(UserID)
 );
 
-CREATE TABLE Notification (
+CREATE TABLE Notifications (
     NotificationID SERIAL PRIMARY KEY,
     Content TEXT,
     CreationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     IsRead BOOLEAN DEFAULT FALSE,
     Type VARCHAR(100),
-    UserID INT REFERENCES "user"(UserID),
-    AdID INT REFERENCES Advertisement(AdID)
+    UserID INT REFERENCES Users(UserID),
+    AdID INT REFERENCES Advertisements(AdID)
 );
 
-CREATE TABLE Location (
+CREATE TABLE Locations (
     LocationID SERIAL PRIMARY KEY,
     Latitude DECIMAL(9, 6),
     Longitude DECIMAL(9, 6),
     Address TEXT,
     City VARCHAR(50),
     Province VARCHAR(50),
-    AdID INT REFERENCES Advertisement(AdID)
+    AdID INT REFERENCES Advertisements(AdID)
 );
 
-CREATE TABLE CategoryAttribute (
+CREATE TABLE CategoryAttributes (
     CategoryAttributeID SERIAL PRIMARY KEY,
     AttributeName VARCHAR(100),
     IsRequired BOOLEAN DEFAULT FALSE,
-    CategoryID INT REFERENCES Category(CategoryID)
+    CategoryID INT REFERENCES Categories(CategoryID)
 );
 
-CREATE TABLE AdAttribute (
+CREATE TABLE AdAttributes (
     AttributeID SERIAL PRIMARY KEY,
     AttributeName VARCHAR(100),
     AttributeValue TEXT,
-    AdID INT REFERENCES Advertisement(AdID),
-    CategoryAttributeID INT REFERENCES CategoryAttribute(CategoryAttributeID)
+    AdID INT REFERENCES Advertisements(AdID),
+    CategoryAttributeID INT REFERENCES CategoryAttributes(CategoryAttributeID)
 );
 
-CREATE TABLE "order" (
+CREATE TABLE Orders (
     OrderID SERIAL PRIMARY KEY,
     OrderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Status VARCHAR(50),
-    AdID INT REFERENCES Advertisement(AdID),
-    BuyerID INT REFERENCES "user"(UserID),
-    TransactionID INT REFERENCES Transaction(TransactionID)
+    AdID INT REFERENCES Advertisements(AdID),
+    BuyerID INT REFERENCES Users(UserID),
+    TransactionID INT REFERENCES Transactions(TransactionID)
 );
 
-CREATE TABLE OTP (
+CREATE TABLE OTPs (
     OTPID SERIAL PRIMARY KEY,
     Code VARCHAR(10),
     ExpiryTime TIMESTAMP,
     IsUsed BOOLEAN DEFAULT FALSE,
     CreationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Purpose VARCHAR(100),
-    UserID INT REFERENCES "user"(UserID),
-    RelatedAdID INT REFERENCES Advertisement(AdID),
-    RelatedTransactionID INT REFERENCES Transaction(TransactionID)
+    UserID INT REFERENCES Users(UserID),
+    RelatedAdID INT REFERENCES Advertisements(AdID),
+    RelatedTransactionID INT REFERENCES Transactions(TransactionID)
 );
 
-CREATE TABLE Commission (
+CREATE TABLE Commissions (
     CommissionID SERIAL PRIMARY KEY,
     Rate NUMERIC(5, 2),
     FixedRate NUMERIC(10, 2),
     MinAmount NUMERIC(10, 2),
-    TransactionID INT REFERENCES Transaction(TransactionID)
+    TransactionID INT REFERENCES Transactions(TransactionID)
 );
 
-CREATE TABLE Wallet (
+CREATE TABLE Wallets (
     WalletID SERIAL PRIMARY KEY,
     Balance NUMERIC(12, 2) DEFAULT 0,
     LastUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UserID INT UNIQUE REFERENCES "user"(UserID)
+    UserID INT UNIQUE REFERENCES Users(UserID)
 );
 
-CREATE TABLE WalletTransaction (
+CREATE TABLE WalletTransactions (
     WalletTransactionID SERIAL PRIMARY KEY,
     Type VARCHAR(50),
     Amount NUMERIC(10, 2),
     Status VARCHAR(50),
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Description TEXT,
-    RelatedTransactionID INT REFERENCES Transaction(TransactionID),
-    WalletID INT REFERENCES Wallet(WalletID)
+    RelatedTransactionID INT REFERENCES Transactions(TransactionID),
+    WalletID INT REFERENCES Wallets(WalletID)
 );
 
 -- Separate payout table using WalletTransactionID as FK
-CREATE TABLE Payout (
+CREATE TABLE Payouts (
     PayoutID SERIAL PRIMARY KEY,
     Amount NUMERIC(10, 2),
     Status VARCHAR(50),
     PayoutDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Notes TEXT,
-    PaymentMethodID INT REFERENCES PaymentMethod(PaymentMethodID),
-    WalletTransactionID INT UNIQUE REFERENCES WalletTransaction(WalletTransactionID)
+    PaymentMethodID INT REFERENCES PaymentMethods(PaymentMethodID),
+    WalletTransactionID INT UNIQUE REFERENCES WalletTransactions(WalletTransactionID)
 );

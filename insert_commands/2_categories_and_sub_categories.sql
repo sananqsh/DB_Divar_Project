@@ -1,5 +1,5 @@
--- Category
-INSERT INTO Category (NameFa, NameEn, Slug, Description, ParentCategoryID)
+-- Categories
+INSERT INTO Categories (NameFa, NameEn, Slug, Description, ParentCategoryID)
 VALUES
 ('املاک', 'Real Estate', 'real-estate', 'Properties and housing', NULL),
 ('وسایل نقلیه', 'Vehicles', 'vehicles', 'Cars, motorcycles, and transportation', NULL),
@@ -15,7 +15,7 @@ VALUES
 ---------------------------------------------------------------------------------------------------------------------
 -- Subcategories
 -- Real Estate Subcategories
-INSERT INTO Category (NameFa, NameEn, Slug, Description, ParentCategoryID)
+INSERT INTO Categories (NameFa, NameEn, Slug, Description, ParentCategoryID)
 VALUES
 ('فروش مسکونی', 'Residential Sale', 'residential-sale', 'Apartments and houses for sale', 1),
 ('اجارهٔ مسکونی', 'Residential Rent', 'residential-rent', 'Apartments and houses for rent', 1),
@@ -25,7 +25,7 @@ VALUES
 ('پروژه‌های ساخت‌وساز', 'Construction Projects', 'construction-projects', 'New developments and construction', 1);
 
 -- Vehicles Subcategories
-INSERT INTO Category (NameFa, NameEn, Slug, Description, ParentCategoryID)
+INSERT INTO Categories (NameFa, NameEn, Slug, Description, ParentCategoryID)
 VALUES
 ('خودرو', 'Cars', 'cars', 'Passenger vehicles', 2),
 ('موتورسیکلت', 'Motorcycles', 'motorcycles', 'Motorcycles and scooters', 2),
@@ -33,7 +33,7 @@ VALUES
 ('قایق و سایر وسایل نقلیه', 'Boats & Other Vehicles', 'boats-other', 'Marine and special vehicles', 2);
 
 -- Digital Goods Subcategories
-INSERT INTO Category (NameFa, NameEn, Slug, Description, ParentCategoryID)
+INSERT INTO Categories (NameFa, NameEn, Slug, Description, ParentCategoryID)
 VALUES
 ('موبایل و تبلت', 'Mobile & Tablets', 'mobile-tablets', 'Smartphones and tablets', 3),
 ('رایانه', 'Computers', 'computers', 'PCs, laptops, and accessories', 3),
@@ -41,8 +41,8 @@ VALUES
 ('صوتی و تصویری', 'Audio & Video', 'audio-video', 'TVs, speakers, and media', 3),
 ('تلفن رومیزی', 'Landline Phones', 'landline-phones', 'Home and office phones', 3);
 
--- Home & Kitchen Subcategories (continued in next message due to length)
-INSERT INTO Category (NameFa, NameEn, Slug, Description, ParentCategoryID)
+-- Home & Kitchen Subcategories (continued in next Messages due to length)
+INSERT INTO Categories (NameFa, NameEn, Slug, Description, ParentCategoryID)
 VALUES
 ('لوازم خانگی برقی', 'Home Appliances', 'home-appliances', 'Electrical home appliances', 4),
 ('ظروف و لوازم آشپزخانه', 'Kitchenware', 'kitchenware', 'Cookware and utensils', 4),
@@ -58,7 +58,7 @@ VALUES
 ('حمام و سرویس بهداشتی', 'Bathroom', 'bathroom', 'Bathroom fixtures and accessories', 4);
 
 -- Services Subcategories
-INSERT INTO Category (NameFa, NameEn, Slug, Description, ParentCategoryID)
+INSERT INTO Categories (NameFa, NameEn, Slug, Description, ParentCategoryID)
 VALUES
 ('موتور و ماشین', 'Vehicle Services', 'vehicle-services', 'Auto repair and maintenance', 5),
 ('پذیرایی، مراسم', 'Catering & Events', 'catering-events', 'Party and event services', 5),
@@ -72,7 +72,7 @@ VALUES
 ('آموزشی', 'Educational', 'educational', 'Tutoring and lessons', 5);
 
 -- Personal Items Subcategories
-INSERT INTO Category (NameFa, NameEn, Slug, Description, ParentCategoryID)
+INSERT INTO Categories (NameFa, NameEn, Slug, Description, ParentCategoryID)
 VALUES
 ('کیف، کفش، لباس', 'Fashion', 'fashion', 'Clothing and accessories', 6),
 ('زیورآلات و اکسسوری', 'Jewelry', 'jewelry', 'Watches and jewelry', 6),
@@ -82,7 +82,7 @@ VALUES
 ('لوازم التحریر', 'Stationery', 'stationery', 'Office and school supplies', 6);
 
 -- Entertainment & Leisure Subcategories
-INSERT INTO Category (NameFa, NameEn, Slug, Description, ParentCategoryID)
+INSERT INTO Categories (NameFa, NameEn, Slug, Description, ParentCategoryID)
 VALUES
 ('بلیت', 'Tickets', 'tickets', 'Event tickets', 7),
 ('تور و چارتر', 'Tours', 'tours', 'Travel packages', 7),
@@ -95,14 +95,14 @@ VALUES
 ('اسباب‌‌بازی', 'Toys', 'toys', 'Games and playthings', 7);
 
 -- Social Subcategories
-INSERT INTO Category (NameFa, NameEn, Slug, Description, ParentCategoryID)
+INSERT INTO Categories (NameFa, NameEn, Slug, Description, ParentCategoryID)
 VALUES
 ('رویداد', 'Events', 'events', 'Community gatherings', 8),
 ('داوطلبانه', 'Volunteer', 'volunteer', 'Volunteer opportunities', 8),
 ('گم‌شده‌ها', 'Lost & Found', 'lost-found', 'Missing items', 8);
 
 -- Industrial Equipment Subcategories
-INSERT INTO Category (NameFa, NameEn, Slug, Description, ParentCategoryID)
+INSERT INTO Categories (NameFa, NameEn, Slug, Description, ParentCategoryID)
 VALUES
 ('مصالح و تجهیزات ساختمان', 'Construction Materials', 'construction-materials', 'Building supplies', 9),
 ('ابزارآلات', 'Tools', 'tools', 'Hand and power tools', 9),
@@ -111,7 +111,7 @@ VALUES
 ('عمده‌فروشی', 'Wholesale', 'wholesale', 'Bulk goods', 9);
 
 -- Jobs & Recruitment Subcategories
-INSERT INTO Category (NameFa, NameEn, Slug, Description, ParentCategoryID)
+INSERT INTO Categories (NameFa, NameEn, Slug, Description, ParentCategoryID)
 VALUES
 ('اداری و مدیریت', 'Administrative', 'administrative', 'Office jobs', 10),
 ('سرایداری و نظافت', 'Maintenance', 'maintenance', 'Custodial work', 10),

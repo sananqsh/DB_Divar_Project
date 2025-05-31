@@ -1,63 +1,63 @@
 -- Advertisements
 ---------------------------------------------------------------------------------------------------------------------
 -- Real Estate Ads
-INSERT INTO Advertisement (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
+INSERT INTO Advertisements (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
 VALUES
 ('Luxury Apartment in Tehran', '3 bedroom apartment with great view', 350000, NOW() - INTERVAL '5 days', NOW() + INTERVAL '25 days', 'active', 42, 11, 3),
 ('Office Space for Rent', 'Prime location in downtown', 1200, NOW() - INTERVAL '2 days', NOW() + INTERVAL '28 days', 'active', 18, 14, 7),
 ('Villa in North Tehran', '500sqm with private garden', 850000, NOW(), NOW() + INTERVAL '30 days', 'active', 7, 11, 2);
 
 -- Vehicle Ads
-INSERT INTO Advertisement (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
+INSERT INTO Advertisements (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
 VALUES
 ('2020 Peugeot 208', 'Low mileage, excellent condition', 18500, NOW() - INTERVAL '10 days', NOW() + INTERVAL '20 days', 'active', 89, 17, 5),
 ('Harley Davidson Sportster', '2018 model, custom parts', 12500, NOW() - INTERVAL '3 days', NOW() + INTERVAL '27 days', 'active', 34, 18, 8),
 ('Car Audio System', 'Brand new Pioneer speakers', 350, NOW(), NOW() + INTERVAL '30 days', 'active', 12, 19, 1);
 
 -- Digital Goods Ads
-INSERT INTO Advertisement (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
+INSERT INTO Advertisements (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
 VALUES
 ('Samsung Galaxy S22', '128GB, unlocked', 899, NOW() - INTERVAL '7 days', NOW() + INTERVAL '23 days', 'active', 76, 21, 4),
 ('Gaming PC Setup', 'RTX 3080, 32GB RAM', 2200, NOW() - INTERVAL '1 day', NOW() + INTERVAL '29 days', 'active', 45, 22, 6),
 ('PS5 Console', 'With 2 controllers', 650, NOW(), NOW() + INTERVAL '30 days', 'active', 102, 23, 9);
 
 -- Home & Kitchen Ads
-INSERT INTO Advertisement (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
+INSERT INTO Advertisements (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
 VALUES
 ('Persian Carpet', 'Handmade 4x6 meters', 2500, NOW() - INTERVAL '15 days', NOW() + INTERVAL '15 days', 'active', 28, 32, 10),
 ('Modern Sofa Set', 'Leather, excellent condition', 1200, NOW() - INTERVAL '4 days', NOW() + INTERVAL '26 days', 'active', 31, 30, 2),
 ('Kitchen Appliances Package', 'Fridge, oven, microwave', 850, NOW(), NOW() + INTERVAL '30 days', 'active', 19, 26, 5);
 
 -- Services Ads
-INSERT INTO Advertisement (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
+INSERT INTO Advertisements (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
 VALUES
 ('Professional Cleaning Service', 'Residential & commercial', 50, NOW() - INTERVAL '8 days', NOW() + INTERVAL '22 days', 'active', 23, 45, 7),
 ('English Tutoring', 'IELTS preparation', 20, NOW() - INTERVAL '1 day', NOW() + INTERVAL '29 days', 'active', 14, 47, 3),
 ('Car Maintenance', 'Oil change and inspection', 30, NOW(), NOW() + INTERVAL '30 days', 'active', 37, 38, 8);
 
 -- Personal Items Ads
-INSERT INTO Advertisement (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
+INSERT INTO Advertisements (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
 VALUES
 ('Designer Handbag', 'Louis Vuitton authentic', 950, NOW() - INTERVAL '12 days', NOW() + INTERVAL '18 days', 'active', 52, 48, 4),
 ('Gold Necklace', '18k with certificate', 1200, NOW() - INTERVAL '3 days', NOW() + INTERVAL '27 days', 'active', 41, 49, 1),
 ('Baby Clothes Set', 'Newborn, unused', 35, NOW(), NOW() + INTERVAL '30 days', 'active', 8, 51, 6);
 
 -- Entertainment & Leisure Ads
-INSERT INTO Advertisement (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
+INSERT INTO Advertisements (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
 VALUES
 ('Concert Tickets', '2 tickets for Coldplay', 180, NOW() - INTERVAL '5 days', NOW() + INTERVAL '25 days', 'active', 67, 54, 9),
 ('Mountain Bike', 'Trek 2021 model', 450, NOW() - INTERVAL '2 days', NOW() + INTERVAL '28 days', 'active', 29, 57, 2),
 ('Persian Cat', '6 months old, vaccinated', 200, NOW(), NOW() + INTERVAL '30 days', 'active', 53, 58, 5);
 
 -- Industrial Equipment Ads
-INSERT INTO Advertisement (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
+INSERT INTO Advertisements (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
 VALUES
 ('Construction Tools', 'Complete set of tools', 800, NOW() - INTERVAL '9 days', NOW() + INTERVAL '21 days', 'active', 17, 67, 10),
 ('Industrial Generator', '50KVA, diesel', 12000, NOW() - INTERVAL '1 day', NOW() + INTERVAL '29 days', 'active', 9, 68, 3),
 ('Office Furniture', 'Desks and chairs', 500, NOW(), NOW() + INTERVAL '30 days', 'active', 24, 69, 7);
 
 -- Jobs Ads
-INSERT INTO Advertisement (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
+INSERT INTO Advertisements (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
 VALUES
 ('IT Specialist Needed', 'Full-time position', NULL, NOW() - INTERVAL '14 days', NOW() + INTERVAL '16 days', 'active', 38, 75, 1),
 ('Restaurant Staff', 'Waiters and cooks', NULL, NOW() - INTERVAL '4 days', NOW() + INTERVAL '26 days', 'active', 22, 74, 4),
@@ -65,7 +65,7 @@ VALUES
 
 
 ---------------------------------------------------------------------------------------------------------------------
-INSERT INTO Advertisement (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
+INSERT INTO Advertisements (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
 VALUES
 ('Cozy Studio for Rent', 'Fully furnished studio ideal for students', 5000, NOW() - INTERVAL '3 days', NOW() + INTERVAL '27 days', 'active', 18, 12, 2),
 ('Modern Office Space in Downtown', '120 sqm office with parking and amenities', 950000, NOW() - INTERVAL '8 days', NOW() + INTERVAL '22 days', 'active', 64, 13, 4),
@@ -91,8 +91,8 @@ VALUES
 ---------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
--- 5. AdImage
-INSERT INTO AdImage (ImageURL, UploadDate, IsMainImage, AdID)
+-- 5. AdImages
+INSERT INTO AdImages (ImageURL, UploadDate, IsMainImage, AdID)
 VALUES
 ('https://example.com/Cozy_Studio_for.jpg', NOW() - INTERVAL '3 days', TRUE, 1),
 ('https://example.com/Cozy_Studio_for2.jpg', NOW() - INTERVAL '3 days', FALSE, 28),
@@ -117,7 +117,7 @@ VALUES
 ('https://example.com/Persian_Cat_for_Sale.jpg', NOW() - INTERVAL '1 days', TRUE, 45),
 ('https://example.com/Construction_Cement_Bags.jpg', NOW() - INTERVAL '8 days', TRUE, 46);
 
-INSERT INTO Advertisement (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
+INSERT INTO Advertisements (Title, Description, Price, PublishDate, ExpiryDate, Status, ViewCount, CategoryID, UserID)
 VALUES
 ('Cozy Studio for Rent', 'Fully furnished studio ideal for students', 5000, NOW() - INTERVAL '3 days', NOW() + INTERVAL '27 days', 'active', 18, 12, 2),
 ('Modern Office Space in Downtown', '120 sqm office with parking and amenities', 950000, NOW() - INTERVAL '8 days', NOW() + INTERVAL '22 days', 'active', 64, 13, 4),

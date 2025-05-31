@@ -1,6 +1,6 @@
 /* ──────────────── WALLETS ──────────────── */
 -- one wallet per user; balances start wherever you like
-INSERT INTO Wallet (Balance, UserID) VALUES
+INSERT INTO Wallets (Balance, UserID) VALUES
   (  500.00,  1),   -- sarah_smith
   ( 1250.75,  3),   -- emily_wilson
   (    0.00,  4),   -- david_brown (admin)
@@ -9,25 +9,25 @@ INSERT INTO Wallet (Balance, UserID) VALUES
 
 /* ─────────── WALLET TRANSACTIONS ────────── */
 /* Using sub-queries keeps you safe from unknown serial IDs. */
-INSERT INTO WalletTransaction
+INSERT INTO WalletTransactions
         (Type,        Amount, Status,     Description,            WalletID)
 VALUES
   ('deposit',        500.00, 'completed', 'Initial top-up',
-                    (SELECT WalletID FROM Wallet WHERE UserID = 1)),
+                    (SELECT WalletID FROM Wallets WHERE UserID = 1)),
   ('deposit',       1500.00, 'completed', 'Monthly salary',
-                    (SELECT WalletID FROM Wallet WHERE UserID = 3)),
+                    (SELECT WalletID FROM Wallets WHERE UserID = 3)),
   ('withdrawal',     200.00, 'completed', 'Bought ad #42',
-                    (SELECT WalletID FROM Wallet WHERE UserID = 3)),
+                    (SELECT WalletID FROM Wallets WHERE UserID = 3)),
   ('deposit',       5000.00, 'pending',   'Incoming bank transfer',
-                    (SELECT WalletID FROM Wallet WHERE UserID = 9)),
+                    (SELECT WalletID FROM Wallets WHERE UserID = 9)),
   ('refund',         250.00, 'completed', 'Order #123 refund',
-                    (SELECT WalletID FROM Wallet WHERE UserID = 5)),
+                    (SELECT WalletID FROM Wallets WHERE UserID = 5)),
   ('withdrawal',    1200.00, 'failed',    'Attempted payout – card declined',
-                    (SELECT WalletID FROM Wallet WHERE UserID = 5)),
+                    (SELECT WalletID FROM Wallets WHERE UserID = 5)),
   ('deposit',        750.00, 'completed', 'Promo bonus',
-                    (SELECT WalletID FROM Wallet WHERE UserID = 1)),
+                    (SELECT WalletID FROM Wallets WHERE UserID = 1)),
   ('withdrawal',      50.00, 'completed', 'Fee: featured-ad upgrade',
-                    (SELECT WalletID FROM Wallet WHERE UserID = 1));
+                    (SELECT WalletID FROM Wallets WHERE UserID = 1));
 
 /* ============================================================
    SECTION 2 – QUICK VISUAL CHECK
@@ -35,8 +35,8 @@ VALUES
    Two simple SELECTs so you can eyeball that the data landed
    as expected before moving on to analytics.
    ============================================================ */
-SELECT * FROM Wallet            ORDER BY WalletID;
-SELECT * FROM WalletTransaction ORDER BY WalletTransactionID;
+SELECT * FROM Wallets            ORDER BY WalletID;
+SELECT * FROM WalletTransactions ORDER BY WalletTransactionID;
 
 /* ============================================================
    SECTION 3 – ANALYTICAL / REPORTING QUERIES
@@ -48,8 +48,8 @@ SELECT * FROM WalletTransaction ORDER BY WalletTransactionID;
 -- Shows every user’s live balance alongside their username.
 SELECT u.Username,
        w.Balance
-FROM   Wallet w
-JOIN   "user" u USING (UserID)
+FROM   Wallets w
+JOIN   Users u USING (UserID)
 ORDER  BY w.Balance DESC;
 
 -- 3.2 DEPOSITS vs WITHDRAWALS PER WALLET
@@ -57,7 +57,7 @@ ORDER  BY w.Balance DESC;
 SELECT WalletID,
        SUM(CASE WHEN Type='deposit'    THEN Amount END) AS deposits,
        SUM(CASE WHEN Type='withdrawal' THEN Amount END) AS withdrawals
-FROM   WalletTransaction
+FROM   WalletTransactions
 GROUP  BY WalletID;
 
 -- 3.3 NET CASH-FLOW BY DAY (completed only)
@@ -67,18 +67,18 @@ SELECT DATE(CreatedAt) AS day,
              WHEN Type IN ('deposit','refund') THEN Amount   -- money in
              ELSE -Amount                                    -- money out
            END) AS net_change
-FROM   WalletTransaction
+FROM   WalletTransactions
 WHERE  Status='completed'              -- ignore pending / failed
 GROUP  BY day
 ORDER  BY day DESC;
 
 -- 3.4 TOP 5 SPENDERS (lifetime)
--- Ranks users by total completed withdrawals.
+-- Ranks Users by total completed withdrawals.
 SELECT u.Username,
        SUM(t.Amount) AS total_spent
-FROM   WalletTransaction t
-JOIN   Wallet w USING (WalletID)
-JOIN   "user" u USING (UserID)
+FROM   WalletTransactions t
+JOIN   Wallets w USING (WalletID)
+JOIN   Users u USING (UserID)
 WHERE  t.Type='withdrawal'
   AND  t.Status='completed'
 GROUP  BY u.Username
@@ -90,11 +90,11 @@ LIMIT  5;
 SELECT w.WalletID,
        u.Username,
        w.Balance
-FROM   Wallet w
-JOIN   "user" u USING (UserID)
+FROM   Wallets w
+JOIN   Users u USING (UserID)
 WHERE  NOT EXISTS (
         SELECT 1
-        FROM   WalletTransaction t
+        FROM   WalletTransactions t
         WHERE  t.WalletID = w.WalletID
           AND  t.CreatedAt >= NOW() - INTERVAL '30 days');
 

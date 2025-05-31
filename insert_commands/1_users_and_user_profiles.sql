@@ -1,4 +1,4 @@
-INSERT INTO "user" (Username, Password, Email, PhoneNumber, RegistrationDate, LastLoginDate, ProfilePicture, UserType, Status)
+INSERT INTO Users (Username, Password, Email, PhoneNumber, RegistrationDate, LastLoginDate, ProfilePicture, UserType, Status)
 VALUES
 ('sarah_smith', 'hashedpass456', 'sarah@example.com', '+155512345',
     '2024-07-15 09:23:45', '2025-05-20 14:12:33',
@@ -74,7 +74,7 @@ VALUES
 
 ('charlotte_thomas', 'cthomas123', 'charlotte@example.com', '+155566677',
     '2024-06-20 10:45:33', '2025-05-27 08:12:34',
-    'https://example.com/charlotte.png', 'admin', 'active'),
+    'https://example.c`om/charlotte.png', 'admin', 'active'),
 
 ('liam_walker', 'liampass456', 'liam@example.com', '+166677788',
     '2024-12-01 09:08:07', '2025-05-18 17:45:22',
@@ -83,7 +83,7 @@ VALUES
 ---------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
-INSERT INTO UserProfile (FirstName, LastName, Address, City, Province, PostalCode, Biography, UserID)
+INSERT INTO UserProfiles (FirstName, LastName, Address, City, Province, PostalCode, Biography, UserID)
 VALUES
 ('Sarah', 'Smith', '456 Oak Avenue', 'Los Angeles', 'CA', '90001', 'Digital marketer and photography enthusiast.', 1),
 ('Michael', 'Jones', '789 Pine Road', 'Chicago', 'IL', '60601', 'Software engineer who loves hiking on weekends.', 2),
