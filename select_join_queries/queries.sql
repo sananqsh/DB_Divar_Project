@@ -26,7 +26,7 @@ WHERE
 ORDER BY a.adid, m.senddate;
 
 -- Average rate for each seller (ordered to see top sellers)
-SELECT u.userid, u.username, AVG(rating) as rate, COUNT(rating) as no_rates, concat(up.firstname, ' ', up.lastname) as full_name
+SELECT u.userid, u.username, AVG(rating) AS rate, COUNT(rating) AS no_rates, CONCAT(up.firstname, ' ', up.lastname) AS full_name
 FROM Users u
 JOIN Reviews r ON u.userid = r.targetuserid
 JOIN UserProfiles up ON u.userid = up.userid
