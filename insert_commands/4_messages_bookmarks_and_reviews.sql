@@ -42,8 +42,14 @@ VALUES
 INSERT INTO Reviews (Rating, Comment, ReviewDate, ReviewerID, TargetUserID)
 VALUES
 (5, 'Great seller!', NOW(), 1, 2),
+(4, 'Great seller!', NOW(), 3, 2),
+(5, 'Great seller!', NOW(), 4, 2),
+(5, 'Great seller!', NOW(), 5, 2),
 (4, 'Has great prices.', NOW(), 1, 3),
 (3, 'Medium quality stuff!', NOW(), 1, 3),
 (1, 'Not a nice attitude...', NOW(), 4, 1),
 (2, 'Not a nice attitude...', NOW(), 3, 1),
+(2, 'Not a nice attitude...', NOW(), 3, 1),
+(2, 'Not a nice attitude...', NOW(), 2, 1),
+(1, 'Not a nice attitude...', NOW(), 2, 1),
 (1, 'Bad seller! :(', NOW(), 4, 4);
